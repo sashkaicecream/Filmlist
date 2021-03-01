@@ -11,4 +11,4 @@
 ## Опис технологій
 
 ## Прототип
-[2021-03-01-11-42-13.png](https://postimg.cc/5XMK1Pq6)
+(https://postimg.cc/5XMK1Pq6)
