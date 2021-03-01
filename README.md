@@ -10,6 +10,6 @@
 ## Опис технологій
 
 
-## [Прототип Figma](https://www.figma.com/file/CzKze5URnojcfxwY5jRVWr/android_kinolist?node-id=0%3A1)
+## Прототип [Figma](https://www.figma.com/file/CzKze5URnojcfxwY5jRVWr/android_kinolist?node-id=0%3A1)
 [![2021-03-01-11-42-13.png](https://i.postimg.cc/MpnC7Nnb/2021-03-01-11-42-13.png)](https://postimg.cc/5XMK1Pq6)
 
