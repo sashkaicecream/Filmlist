@@ -1,4 +1,4 @@
-# Android (filmlist)
+# Filmlist
 Додаток з переліком кінофільмів. На головній сторінці галерея афіш, на які можна натиснути і прочитати опис та повну інформацію про фільм, також їх можна буде лайкати (додавати у обране) для перегляду пізніше. Тобто, цей додаток схожий чимось на wish list. 
 
 
@@ -8,6 +8,13 @@
 
 
 ## Опис технологій
+Kotlin 1.4  
+OkHttp3, Retrofit
+Coroutines
+LiveData, ViewModel, RecyclerView, Paging
+Room
+Picasso
+JUnit, Mockito
 
 
 ## Прототип [Figma](https://www.figma.com/file/CzKze5URnojcfxwY5jRVWr/android_kinolist?node-id=0%3A1)
