@@ -8,13 +8,13 @@
 
 
 ## Опис технологій
-Kotlin 1.4  
-OkHttp3, Retrofit
-Coroutines
-LiveData, ViewModel, RecyclerView, Paging
-Room
-Picasso
-JUnit, Mockito
+- Kotlin 1.4   
+- OkHttp3, Retrofit
+- Coroutines
+- LiveData, ViewModel, RecyclerView, Paging
+- Room
+- Picasso
+- JUnit, Mockito
 
 
 ## Прототип [Figma](https://www.figma.com/file/CzKze5URnojcfxwY5jRVWr/android_kinolist?node-id=0%3A1)
