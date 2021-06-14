@@ -3,6 +3,7 @@
     package="com.example.filmlist">
 
     <application
+        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:name=".di.App"
         android:icon="@mipmap/ic_launcher"
