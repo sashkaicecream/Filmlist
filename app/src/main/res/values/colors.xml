@@ -6,5 +6,9 @@
     <color name="russian_violet">#2C1A43</color>
     <color name="dark_purple">#231A37</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white_100">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="ebony_clay">#311F4A</color>
+    <color name="tuna_0">#002F1E48</color>
+    <color name="cod_gray">#171717</color>
 </resources>

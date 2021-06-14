@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/dark_purple">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,8 +18,34 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingVertical="10dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/films_button_favourites_txt"
+        android:textAllCaps="false"
+        android:textColor="@color/cod_gray"
+        android:textSize="16sp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:background="@drawable/background_nav_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:drawableLeft="@drawable/ic_list"
+        android:drawablePadding="12dp"
+        android:paddingStart="21dp"
+        android:paddingEnd="38dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

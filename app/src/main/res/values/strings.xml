@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Filmlist</string>
+    <string name="films_button_favourites_txt">Favourites</string>
+    <string name="films_button_back_txt">Back</string>
 </resources>

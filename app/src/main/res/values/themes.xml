@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Filmlist" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Filmlist" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/port_gore_100</item>
         <item name="colorPrimaryVariant">@color/port_gore_100</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/white_100</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/port_gore_100</item>
         <item name="colorSecondaryVariant">@color/port_gore_100</item>
