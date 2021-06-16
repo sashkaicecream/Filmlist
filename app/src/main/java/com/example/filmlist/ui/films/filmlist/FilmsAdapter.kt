@@ -10,8 +10,8 @@ import com.example.filmlist.ui.utils.getHeart
 import com.squareup.picasso.Picasso
 
 class FilmsAdapter(
-    val onLikeClicked: (String, Boolean) -> Unit,
-    val onItemClicked: (String) -> Unit,
+    val onLikeClicked: (Int, Boolean) -> Unit,
+    val onItemClicked: (Int) -> Unit,
 ) : RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder>() {
     private var data = listOf<FilmRecyclerItem>()
 
@@ -67,8 +67,11 @@ class FilmsAdapter(
                 onItemClicked(film.id)
             }
 
-            binding.title.text = film.title
-            binding.year.text = film.year
+            val title = film.title
+            binding.title.text = if (title.isNotBlank()) title else "[no title]"
+
+            val date = film.date
+            binding.year.text = if (title.isNotBlank()) date else "[no date]"
         }
     }
 }

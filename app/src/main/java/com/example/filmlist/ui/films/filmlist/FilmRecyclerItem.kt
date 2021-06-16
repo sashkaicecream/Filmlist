@@ -4,17 +4,17 @@ import android.net.Uri
 import com.example.filmlist.core.domain.models.Film
 
 data class FilmRecyclerItem(
-    val id: String,
+    val id: Int,
     val poster: Uri?,
     val title: String,
-    val year: String,
+    val date: String,
     var liked: Boolean,
 )
 
 fun Film.toFilmRecyclerItem() = FilmRecyclerItem(
     id = id,
-    poster = null,
+    poster = Uri.parse(poster),
     title = title,
-    year = year,
+    date = date,
     liked = liked
 )

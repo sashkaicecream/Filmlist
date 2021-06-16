@@ -19,9 +19,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun back() {
-        val next = when(prev) {
-            is LikedFilmsStage -> LikedFilmsStage
-            is FilmsStage -> FilmsStage
+        val next = when {
+            prev is LikedFilmsStage -> LikedFilmsStage
+            prev is FilmsStage || _stage.value == LikedFilmsStage -> FilmsStage
             else -> Cancel
         }
 

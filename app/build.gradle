@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlinx-serialization'
+
 }
 
 android {
@@ -16,6 +18,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_BASE_URL", '"' + getProp('API_BASE_URL') + '"'
+        buildConfigField "String", "API_KEY", '"' + getProp('API_KEY') + '"'
+        buildConfigField "String", "IMG_BASE_URL_SMALL", '"' + getProp('IMG_BASE_URL_SMALL') + '"'
+        buildConfigField "String", "IMG_BASE_URL_LARGE", '"' + getProp('IMG_BASE_URL_LARGE') + '"'
     }
 
     buildTypes {
@@ -34,6 +41,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+}
+
+def getProp(name) {
+    return System.getenv(name) ?: rootProject.localprops[name] ?: project[name]
 }
 
 dependencies {
