@@ -15,26 +15,26 @@ data class AnimationSet(
 fun getAnimationSet(cur: ApplicationStage?, prev: ApplicationStage?) = when {
     prev == null -> {
         AnimationSet(
-                animEnter = R.anim.no_anim,
-                animExit = R.anim.slide_to_left,
-                popEnter = R.anim.no_anim,
-                popExit = R.anim.slide_to_right
+            animEnter = R.anim.no_anim,
+            animExit = R.anim.slide_to_left,
+            popEnter = R.anim.no_anim,
+            popExit = R.anim.slide_to_right
         )
     }
     prev <= cur -> {
         AnimationSet(
-                animEnter = R.anim.slide_from_right,
-                animExit = R.anim.slide_to_left,
-                popEnter = R.anim.slide_from_left,
-                popExit = R.anim.slide_to_right
+            animEnter = R.anim.slide_from_right,
+            animExit = R.anim.slide_to_left,
+            popEnter = R.anim.slide_from_left,
+            popExit = R.anim.slide_to_right
         )
     }
     else -> {
         AnimationSet(
-                animEnter = R.anim.slide_from_left,
-                animExit = R.anim.slide_to_right,
-                popEnter = R.anim.slide_from_right,
-                popExit = R.anim.slide_to_left
+            animEnter = R.anim.slide_from_left,
+            animExit = R.anim.slide_to_right,
+            popEnter = R.anim.slide_from_right,
+            popExit = R.anim.slide_to_left
         )
     }
 }

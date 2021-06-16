@@ -1,4 +1,4 @@
-package com.example.filmlist.ui.films
+package com.example.filmlist.ui.films.filmlist
 
 import android.R.attr.spacing
 import android.graphics.Rect

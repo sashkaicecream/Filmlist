@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.filmlist.R
 import com.example.filmlist.databinding.ActivityMainBinding
+import com.example.filmlist.ui.animations.AnimationSet
 import com.example.filmlist.ui.animations.getAnimationSet
-import com.example.filmlist.ui.films.FragmentFilmDetailed
-import com.example.filmlist.ui.films.FragmentFilms
+import com.example.filmlist.ui.films.film_detailed.FragmentFilmDetailed
+import com.example.filmlist.ui.films.filmlist.FragmentFilms
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,24 +23,37 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.stage.observe(this) { stage ->
-            val fragment = when(stage) {
-                is ApplicationStage.FilmDetailedStage -> FragmentFilmDetailed()
-                ApplicationStage.FilmsStage -> FragmentFilms()
-                ApplicationStage.LikedFilmsStage -> FragmentFilms().also { it.likeStage = true }
+            when(stage) {
+                ApplicationStage.FilmsStage -> {
+                    changeFragment(FragmentFilms(), false)
+                }
+                ApplicationStage.LikedFilmsStage -> {
+                    val fr = FragmentFilms().also { it.likeStage = true }
+                    changeFragment(fr)
+                }
+                is ApplicationStage.FilmDetailedStage -> {
+                    val fr = FragmentFilmDetailed.newInstance(stage.id)
+                    changeFragment(fr)
+                }
+                ApplicationStage.Cancel -> {
+                    finish()
+                }
             }
-
-            changeFragment(fragment)
         }
     }
 
-    private fun changeFragment(fragment: Fragment) {
+    private fun changeFragment(fragment: Fragment, backStack: Boolean = true) {
         val animationSet = getAnimationSet(viewModel.stage.value, viewModel.prev)
 
         supportFragmentManager.changeFragment(
             fragment = fragment,
             container = R.id.fragment_container,
-            backStack = true,
+            backStack = backStack,
             animationSet = animationSet,
         )
+    }
+
+    override fun onBackPressed() {
+        viewModel.back()
     }
 }
