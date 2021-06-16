@@ -1,4 +1,4 @@
-package com.example.filmlist.ui.films
+package com.example.filmlist.ui.films.filmlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,4 +26,18 @@ class FilmsViewModel(private val filmsRepo: FilmsRepository) : ViewModel() {
         }
     }
 
+    fun getLikedFilms() {
+        viewModelScope.launch {
+            filmsRepo.getLikedFilms().fold(
+                { _films.postValue(it) },
+                { _filmsException.postValue(it) }
+            )
+        }
+    }
+
+    fun changeFilmLike(id: String, newState: Boolean) {
+        viewModelScope.launch {
+            filmsRepo.changeLikeState(id, newState)
+        }
+    }
 }

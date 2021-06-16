@@ -4,7 +4,8 @@ import com.example.filmlist.core.datasource.FilmsDataSource
 import com.example.filmlist.core.domain.repository.FilmsRepository
 import com.example.filmlist.data.local.FilmsLocalDataSource
 import com.example.filmlist.data.remote.FilmsRemoteDataSource
-import com.example.filmlist.ui.films.FilmsViewModel
+import com.example.filmlist.ui.films.film_detailed.FilmDetailedViewModel
+import com.example.filmlist.ui.films.filmlist.FilmsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -19,4 +20,5 @@ val filmsModule = module {
     single { FilmsRepository(get(local), get(remote)) }
 
     viewModel { FilmsViewModel(get()) }
+    viewModel { FilmDetailedViewModel(get()) }
 }

@@ -1,4 +1,4 @@
-package com.example.filmlist.ui.films
+package com.example.filmlist.ui.films.filmlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmlist.R
 import com.example.filmlist.databinding.ItemFilmBinding
+import com.example.filmlist.ui.utils.getHeart
 import com.squareup.picasso.Picasso
 
-class FilmsAdapter : RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder>() {
+class FilmsAdapter(
+    val onLikeClicked: (String, Boolean) -> Unit,
+    val onItemClicked: (String) -> Unit,
+) : RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder>() {
     private var data = listOf<FilmRecyclerItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmsViewHolder {
@@ -49,8 +53,19 @@ class FilmsAdapter : RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder>() {
                 picasso.load(R.drawable.pic_no_poster_large).into(binding.poster)
             }
 
-            val heart = if (film.liked) R.drawable.ic_heart_liked else R.drawable.ic_heart
-            binding.like.setImageResource(heart)
+            binding.like.setImageResource(getHeart(film.liked))
+            binding.like.setOnClickListener {
+                val newState = !film.liked
+
+                film.liked = newState
+                binding.like.setImageResource(getHeart(newState))
+
+                onLikeClicked(film.id, newState)
+            }
+
+            binding.root.setOnClickListener {
+                onItemClicked(film.id)
+            }
 
             binding.title.text = film.title
             binding.year.text = film.year

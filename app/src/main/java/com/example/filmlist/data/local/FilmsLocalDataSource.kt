@@ -3,10 +3,10 @@ package com.example.filmlist.data.local
 import com.example.filmlist.core.datasource.FilmsDataSource
 import com.example.filmlist.core.domain.models.Film
 import com.example.filmlist.core.domain.models.FilmDetailed
-import com.example.filmlist.data.mappers.toFilm
-import com.example.filmlist.data.mappers.toFilmDetailed
-import com.example.filmlist.data.mappers.toFilmLocal
 import com.example.filmlist.data.models.FilmLocal
+import com.example.filmlist.data.models.toFilm
+import com.example.filmlist.data.models.toFilmDetailed
+import com.example.filmlist.data.models.toFilmLocal
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
@@ -23,6 +23,15 @@ class FilmsLocalDataSource(/* dao */) : FilmsDataSource {
         }
     }
 
+    override suspend fun getLikedFilms(): Result<List<Film>, Exception> {
+        val films = cachedFilms.filter { it.liked }
+        return if (films.isNotEmpty()) {
+            Ok(films.map(FilmLocal::toFilm))
+        } else {
+            Err(Exception("$tag: no film cached"))
+        }
+    }
+
     override suspend fun getFilmDetailed(id: String): Result<FilmDetailed, Exception> {
         val film = cachedFilms.find { it.id == id }
         return if (film != null) {
@@ -32,18 +41,27 @@ class FilmsLocalDataSource(/* dao */) : FilmsDataSource {
         }
     }
 
-    override suspend fun saveFilms(films: List<Film>): Result<Unit, Exception> {
+    override suspend fun saveFilms(films: List<Film>){
+        // in room it will be "onConflictStrategy.Replace"
+        // and bug with duplicated files will disappear
         cachedFilms.addAll(films.map(Film::toFilmLocal))
-        return Ok(Unit)
     }
 
-    override suspend fun saveFilm(film: FilmDetailed): Result<Unit, Exception> {
+    override suspend fun saveFilm(film: FilmDetailed) {
+        // in room it will be "onConflictStrategy.Replace"
         cachedFilms.add(film.toFilmLocal())
-        return Ok(Unit)
     }
 
-    override suspend fun saveFilm(film: Film): Result<Unit, Exception> {
+    override suspend fun saveFilm(film: Film) {
+        // in room it will be "onConflictStrategy.Replace"
         cachedFilms.add(film.toFilmLocal())
-        return Ok(Unit)
+    }
+
+    override suspend fun changeLikeState(id: String, newState: Boolean) {
+        cachedFilms.find { it.id == id }?.apply { liked = newState }
+    }
+
+    override suspend fun checkLiked(id: String): Boolean {
+        return id in cachedFilms.filter { it.liked }.map { it.id }
     }
 }

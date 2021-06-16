@@ -1,4 +1,4 @@
-package com.example.filmlist.ui.films
+package com.example.filmlist.ui.films.filmlist
 
 import android.net.Uri
 import com.example.filmlist.core.domain.models.Film
@@ -8,7 +8,7 @@ data class FilmRecyclerItem(
     val poster: Uri?,
     val title: String,
     val year: String,
-    val liked: Boolean,
+    var liked: Boolean,
 )
 
 fun Film.toFilmRecyclerItem() = FilmRecyclerItem(
@@ -16,5 +16,5 @@ fun Film.toFilmRecyclerItem() = FilmRecyclerItem(
     poster = null,
     title = title,
     year = year,
-    liked =
+    liked = liked
 )

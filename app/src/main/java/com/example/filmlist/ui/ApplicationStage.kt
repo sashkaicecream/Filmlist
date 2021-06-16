@@ -8,9 +8,10 @@ import com.example.filmlist.core.domain.models.FilmDetailed
 import com.example.filmlist.ui.animations.AnimationSet
 
 sealed class ApplicationStage(val weight: Int) {
+    object Cancel : ApplicationStage(-1)
     object FilmsStage : ApplicationStage(0)
     object LikedFilmsStage : ApplicationStage(1)
-    class FilmDetailedStage(val filmDetailed: FilmDetailed) : ApplicationStage(2)
+    class FilmDetailedStage(val id: String) : ApplicationStage(2)
 }
 
 operator fun ApplicationStage.compareTo(other: ApplicationStage?): Int {
