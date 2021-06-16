@@ -17,12 +17,12 @@ class FilmsRepository(
 
     suspend fun getLikedFilms() = local.getLikedFilms()
 
-    suspend fun getFilmDetailed(id: String) = remote.getFilmDetailed(id)
+    suspend fun getFilmDetailed(id: Int) = remote.getFilmDetailed(id)
         .onSuccess { local.saveFilm(it) }
         .map { it.copy(liked = local.checkLiked(id)) }
         .orElse { local.getFilmDetailed(id) }
 
     suspend fun saveFilm(film: Film) = local.saveFilm(film)
 
-    suspend fun changeLikeState(id: String, newState: Boolean) = local.changeLikeState(id, newState)
+    suspend fun changeLikeState(id: Int, newState: Boolean) = local.changeLikeState(id, newState)
 }

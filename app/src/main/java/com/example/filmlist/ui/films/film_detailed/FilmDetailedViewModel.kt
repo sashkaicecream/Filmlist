@@ -16,7 +16,7 @@ class FilmDetailedViewModel(private val filmsRepo: FilmsRepository) : ViewModel(
     private val _filmException = MutableLiveData<Exception>()
     val filmException: LiveData<Exception> get() = _filmException
 
-    fun getFilmDetailed(id: String) {
+    fun getFilmDetailed(id: Int) {
         viewModelScope.launch {
             filmsRepo.getFilmDetailed(id).fold(
                 { _film.postValue(it) },
@@ -25,7 +25,7 @@ class FilmDetailedViewModel(private val filmsRepo: FilmsRepository) : ViewModel(
         }
     }
 
-    fun changeFilmLike(id: String, newState: Boolean) {
+    fun changeFilmLike(id: Int, newState: Boolean) {
         viewModelScope.launch {
             filmsRepo.changeLikeState(id, newState)
         }

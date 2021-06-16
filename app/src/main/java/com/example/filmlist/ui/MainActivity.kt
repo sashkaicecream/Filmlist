@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.filmlist.R
 import com.example.filmlist.databinding.ActivityMainBinding
-import com.example.filmlist.ui.animations.AnimationSet
 import com.example.filmlist.ui.animations.getAnimationSet
 import com.example.filmlist.ui.films.film_detailed.FragmentFilmDetailed
 import com.example.filmlist.ui.films.filmlist.FragmentFilms
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             fragment = fragment,
             container = R.id.fragment_container,
             backStack = backStack,
-            animationSet = animationSet,
+            animSet = animationSet,
         )
     }
 

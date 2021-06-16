@@ -1,46 +1,55 @@
 package com.example.filmlist.data.models
 
+import com.example.filmlist.BuildConfig
 import com.example.filmlist.core.domain.models.Film
 import com.example.filmlist.core.domain.models.FilmDetailed
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 data class FilmLocal(
-    val id: String,
-    val poster: String,
+    val id: Int,
+    val poster: String?,
     val title: String,
-    val year: String,
+    val date: String,
     var liked: Boolean,
-    val description: String? = null,
+    val overview: String? = null,
+    val voteAverage: Double? = null,
 )
 
-data class FilmsRemoteRequest(
-    val apiKey: String,
+@Serializable
+data class FilmsResponse(
+    val page: Int,
+    val results: List<FilmRemoteResponse>,
 )
 
-data class FilmDetailedRemoteRequest(
-    val apiKey: String,
-    val id: String,
-)
-
+@Serializable
 data class FilmRemoteResponse(
-    val id: String,
-    val name: String,
-    val poster: String,
-    val releaseYear: String,
+    val id: Int,
+    val title: String = "",
+    @SerialName(value = "poster_path")
+    val poster: String?,
+    @SerialName(value = "release_date")
+    val releaseDate: String = "",
 )
 
+@Serializable
 data class FilmDetailedRemoteResponse(
-    val id: String,
-    val name: String,
-    val poster: String,
-    val releaseYear: String,
-    val description: String?,
+    val id: Int,
+    val title: String = "",
+    @SerialName(value = "poster_path")
+    val poster: String?,
+    @SerialName(value = "release_date")
+    val releaseDate: String = "",
+    val overview: String = "",
+    @SerialName(value = "vote_average")
+    val voteAverage: Double = 0.0,
 )
 
 fun Film.toFilmLocal() = FilmLocal(
     id = id,
     poster = poster,
     title = title,
-    year = year,
+    date = date,
     liked = liked,
 )
 
@@ -48,16 +57,17 @@ fun FilmDetailed.toFilmLocal() = FilmLocal(
     id = id,
     poster = poster,
     title = title,
-    year = year,
+    date = date,
     liked = liked,
-    description = description
+    overview = overview,
+    voteAverage = voteAverage,
 )
 
 fun FilmLocal.toFilm() = Film(
     id = id,
     poster = poster,
     title = title,
-    year = year,
+    date = date,
     liked = liked,
 )
 
@@ -65,22 +75,24 @@ fun FilmLocal.toFilmDetailed() = FilmDetailed(
     id = id,
     poster = poster,
     title = title,
-    year = year,
+    date = date,
     liked = liked,
-    description = description
+    overview = overview,
+    voteAverage = voteAverage,
 )
 
 fun FilmRemoteResponse.toFilm() = Film(
     id = id,
-    poster = poster,
-    title = name,
-    year = releaseYear,
+    poster = BuildConfig.IMG_BASE_URL_SMALL + poster,
+    title = title,
+    date = releaseDate,
 )
 
 fun FilmDetailedRemoteResponse.toFilmDetailed() = FilmDetailed(
     id = id,
-    poster = poster,
-    title = name,
-    year = releaseYear,
-    description = description,
+    poster = BuildConfig.IMG_BASE_URL_LARGE + poster,
+    title = title,
+    date = releaseDate,
+    overview = overview,
+    voteAverage = voteAverage,
 )

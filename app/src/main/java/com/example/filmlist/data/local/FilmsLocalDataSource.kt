@@ -32,7 +32,7 @@ class FilmsLocalDataSource(/* dao */) : FilmsDataSource {
         }
     }
 
-    override suspend fun getFilmDetailed(id: String): Result<FilmDetailed, Exception> {
+    override suspend fun getFilmDetailed(id: Int): Result<FilmDetailed, Exception> {
         val film = cachedFilms.find { it.id == id }
         return if (film != null) {
             Ok(film.toFilmDetailed())
@@ -57,11 +57,11 @@ class FilmsLocalDataSource(/* dao */) : FilmsDataSource {
         cachedFilms.add(film.toFilmLocal())
     }
 
-    override suspend fun changeLikeState(id: String, newState: Boolean) {
+    override suspend fun changeLikeState(id: Int, newState: Boolean) {
         cachedFilms.find { it.id == id }?.apply { liked = newState }
     }
 
-    override suspend fun checkLiked(id: String): Boolean {
+    override suspend fun checkLiked(id: Int): Boolean {
         return id in cachedFilms.filter { it.liked }.map { it.id }
     }
 }

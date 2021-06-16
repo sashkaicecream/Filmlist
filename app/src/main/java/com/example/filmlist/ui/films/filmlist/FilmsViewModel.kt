@@ -35,7 +35,7 @@ class FilmsViewModel(private val filmsRepo: FilmsRepository) : ViewModel() {
         }
     }
 
-    fun changeFilmLike(id: String, newState: Boolean) {
+    fun changeFilmLike(id: Int, newState: Boolean) {
         viewModelScope.launch {
             filmsRepo.changeLikeState(id, newState)
         }

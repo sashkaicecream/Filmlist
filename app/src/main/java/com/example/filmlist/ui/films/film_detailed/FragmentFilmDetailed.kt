@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.filmlist.R
 import com.example.filmlist.core.domain.models.FilmDetailed
@@ -19,7 +21,7 @@ class FragmentFilmDetailed private constructor(): Fragment() {
     private var _binding: FragmentFilmDetailedBinding? = null
     private val binding get() = _binding!!
 
-    private var id: String = ""
+    private var filmId: Int = 0
     private val flowViewModel: MainViewModel by sharedViewModel()
     private val viewModel: FilmDetailedViewModel by viewModel()
 
@@ -41,7 +43,7 @@ class FragmentFilmDetailed private constructor(): Fragment() {
             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.getFilmDetailed(id)
+        viewModel.getFilmDetailed(filmId)
 
         binding.back.setOnClickListener {
             flowViewModel.back()
@@ -52,7 +54,7 @@ class FragmentFilmDetailed private constructor(): Fragment() {
         var copyFilm = film.copy()
 
         val picasso = Picasso.get()
-        if (copyFilm.poster.isNotBlank()) {
+        if (!copyFilm.poster.isNullOrBlank()) {
             picasso
                 .load(copyFilm.poster)
                 .placeholder(R.drawable.pic_no_poster)
@@ -72,9 +74,19 @@ class FragmentFilmDetailed private constructor(): Fragment() {
             viewModel.changeFilmLike(id, newState)
         }
 
-        title.text = copyFilm.title
-        year.text = copyFilm.year
-        description.text = copyFilm.description ?: ""
+        binding.title.setOrGoneIfBlank(copyFilm.title)
+        binding.date.setOrGoneIfBlank(copyFilm.date)
+        binding.overview.setOrGoneIfBlank(copyFilm.overview)
+        binding.voteAverage.setOrGoneIfBlank(copyFilm.voteAverage.toString())
+    }
+
+    private fun TextView.setOrGoneIfBlank(value: String?) {
+        if (!value.isNullOrBlank()) {
+            text = value
+            isVisible = true
+        } else {
+            isVisible = false
+        }
     }
 
     override fun onDestroyView() {
@@ -83,8 +95,8 @@ class FragmentFilmDetailed private constructor(): Fragment() {
     }
 
     companion object {
-        fun newInstance(id: String): FragmentFilmDetailed {
-            return FragmentFilmDetailed().also { it.id = id }
+        fun newInstance(id: Int): FragmentFilmDetailed {
+            return FragmentFilmDetailed().also { it.filmId = id }
         }
     }
 }

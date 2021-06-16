@@ -5,7 +5,7 @@ import com.example.filmlist.R
 import com.example.filmlist.ui.ApplicationStage
 import com.example.filmlist.ui.compareTo
 
-data class AnimationSet(
+data class AnimSet(
     @AnimRes val animEnter: Int = R.anim.slide_from_right,
     @AnimRes val animExit: Int = R.anim.slide_to_left,
     @AnimRes val popEnter: Int = R.anim.slide_from_left,
@@ -14,7 +14,7 @@ data class AnimationSet(
 
 fun getAnimationSet(cur: ApplicationStage?, prev: ApplicationStage?) = when {
     prev == null -> {
-        AnimationSet(
+        AnimSet(
             animEnter = R.anim.no_anim,
             animExit = R.anim.slide_to_left,
             popEnter = R.anim.no_anim,
@@ -22,7 +22,7 @@ fun getAnimationSet(cur: ApplicationStage?, prev: ApplicationStage?) = when {
         )
     }
     prev <= cur -> {
-        AnimationSet(
+        AnimSet(
             animEnter = R.anim.slide_from_right,
             animExit = R.anim.slide_to_left,
             popEnter = R.anim.slide_from_left,
@@ -30,7 +30,7 @@ fun getAnimationSet(cur: ApplicationStage?, prev: ApplicationStage?) = when {
         )
     }
     else -> {
-        AnimationSet(
+        AnimSet(
             animEnter = R.anim.slide_from_left,
             animExit = R.anim.slide_to_right,
             popEnter = R.anim.slide_from_right,
